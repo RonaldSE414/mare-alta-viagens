@@ -1,6 +1,6 @@
 # Maré Alta Viagens
 
-Site de turismo em português com uma abertura em vídeo, uma transição em forma de onda e um catálogo de destinos para explorar.
+Site de turismo com uma abertura em vídeo, uma transição em forma de onda e um catálogo de destinos para explorar.
 
 **[Visite o site publicado](https://marealta-1rt.pages.dev/)**
 
