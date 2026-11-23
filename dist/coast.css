@@ -1,0 +1,357 @@
+:root {
+  --aqua: #4eccc4;
+  --blue: #146a70;
+}
+
+.ocean {
+  --scene-height: max(470px, 100svh);
+  --reveal-distance: clamp(230px, 72svh, 720px);
+  position: relative;
+  z-index: 1;
+  color: #fffaf0;
+}
+.ocean-scene {
+  position: relative;
+  isolation: isolate;
+  height: var(--scene-height);
+  overflow: clip;
+}
+.ocean-visual, .ocean-wash, .ocean-foreground, .ocean-poster, #ocean-video, .ocean-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.ocean-visual { background: #16636d; }
+.ocean-wash {
+  background: linear-gradient(170deg, #70b8ac95 32%, #e6f0dcaa 62%, #f4f0e721 90%);
+  opacity: 0;
+}
+.ocean-poster, #ocean-video { object-fit: cover; object-position: var(--surf-crop, 50% 50%); }
+#ocean-video { opacity: 0; transition: opacity .65s ease; }
+#ocean-video.ocean-video-ready { opacity: 1; }
+.ocean-shade {
+  background: radial-gradient(ellipse at center, #042e387a, #042e3800 76%),
+    linear-gradient(180deg, #032c3855, transparent 28%, transparent 62%, #073d478c);
+}
+.ocean-reveal { height: calc(var(--scene-height) + var(--reveal-distance)); pointer-events: none; overflow-anchor: none; }
+.ocean-reveal .ocean-scene { position: sticky; top: 0; pointer-events: auto; }
+.ocean-reveal + .site { margin-block-start: calc(-1 * var(--scene-height)); }
+.ocean-reveal .ocean-visual {
+  clip-path: var(--shoreline, none);
+  -webkit-mask-image: linear-gradient(#000 var(--glass-start, 100%), #0003 var(--glass-end, 115%));
+  mask-image: linear-gradient(#000 var(--glass-start, 100%), #0003 var(--glass-end, 115%));
+  opacity: var(--water-opacity, 1);
+}
+.ocean-reveal .ocean-wash {
+  clip-path: var(--wash-line, none);
+  opacity: var(--wash-opacity, 0);
+}
+.ocean-reveal .ocean-foreground { opacity: var(--foreground-opacity, 1); transform: translateY(var(--foreground-lift, 0px)); }
+.ocean-pass-through .ocean-scene { pointer-events: none; }
+.ocean-is-revealed .ocean-visual,
+.ocean-is-revealed .ocean-wash,
+.ocean-hide-controls .ocean-foreground a,
+.ocean-hide-controls .ocean-toggle { visibility: hidden; }
+
+.ocean-plan, .ocean-enter, .ocean-toggle { pointer-events: auto; }
+.ocean-plan {
+  position: absolute;
+  top: max(19px, env(safe-area-inset-top));
+  right: 5vw;
+  border: 1px solid #fff8e49a;
+  border-radius: 50px;
+  background: #092d2b42;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background .2s, color .2s;
+}
+.ocean-plan:hover { background: var(--paper); color: var(--ink); }
+.ocean-title {
+  position: absolute;
+  inset: 70px 5vw;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: clamp(12px, 2vw, 24px);
+  text-align: center;
+  animation: rise 1.3s cubic-bezier(.2,.75,.25,1) both;
+}
+.ocean-title h1 {
+  font-size: clamp(68px, 14vw, 208px);
+  line-height: .84;
+  letter-spacing: -.036em;
+  text-wrap: balance;
+  text-shadow: 0 2px 18px #042a348a, 0 13px 55px #052c365e;
+}
+.ocean-title h1 em { color: #befff0; }
+.ocean-slogan {
+  margin: 0;
+  font: 500 clamp(21px, 3vw, 43px)/1.15 var(--sans);
+  letter-spacing: -.035em;
+  text-shadow: 0 1px 14px #042a349c;
+}
+.ocean-tagline {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: .19em;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-shadow: 0 1px 12px #092c34;
+}
+.ocean-enter, .ocean-toggle {
+  position: absolute;
+  bottom: max(31px, env(safe-area-inset-bottom));
+}
+.ocean-enter {
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-shadow: 0 1px 10px #042a34;
+}
+.ocean-enter-icon, .ocean-toggle {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #fff8e4a8;
+  border-radius: 50%;
+  background: #092d2b50;
+  color: inherit;
+  transition: background .25s, color .25s, transform .25s;
+}
+.ocean-enter:hover .ocean-enter-icon, .ocean-toggle:hover { background: var(--paper); color: var(--ink); transform: translateY(-2px); }
+.ocean-toggle { right: 5vw; }
+.ocean-toggle svg { width: 17px; height: 17px; }
+
+.site-header { background: #f4f0e7f5; backdrop-filter: blur(10px); }
+.site-header .brand svg { color: var(--blue); }
+#paisagens { scroll-margin-top: calc(var(--header-height) + 18px); }
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0,.84fr) minmax(0,1.16fr);
+  align-items: center;
+  gap: clamp(22px, 6vw, 107px);
+  padding-block: clamp(64px, 10vw, 142px) clamp(51px, 8vw, 110px);
+  border-bottom: 1px solid var(--line);
+}
+.intro .eyebrow { margin: 0 0 17px; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
+.intro h2 { font-size: clamp(72px, 10vw, 151px); letter-spacing: -.042em; line-height: .77; }
+.intro h2 em, .landscapes h2 em, .section-head em { color: var(--blue); }
+.intro-description { max-width: 350px; margin: 25px 0 19px; color: var(--muted); font-size: clamp(16px, 1.7vw, 19px); }
+.intro-photo {
+  display: grid;
+  grid-template: 1fr 17% auto / 1fr 23%;
+  position: relative;
+  align-items: start;
+  min-height: 355px;
+  aspect-ratio: 1.36;
+  margin: 0;
+}
+.intro-photo img:first-child {
+  width: 100%;
+  height: 100%;
+  grid-area: 1 / 1 / 3 / 3;
+  object-fit: cover;
+  object-position: 65% 47%;
+  clip-path: inset(0 8% 0 0);
+}
+.intro-photo .intro-inset {
+  grid-area: 2 / 2 / 4 / 3;
+  z-index: 1;
+  width: 100%;
+  height: 155%;
+  align-self: end;
+  object-fit: cover;
+  border: 6px solid var(--paper);
+  border-right: 0;
+  border-bottom: 0;
+}
+.intro-photo figcaption {
+  grid-area: 3 / 1 / 4 / 2;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-top: 11px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.intro-photo figcaption svg { width: 15px; height: 15px; color: var(--blue); }
+.intro-photo figcaption span { margin-left: auto; padding-right: 8%; }
+
+.search-panel {
+  margin-block-start: clamp(24px, 5vw, 43px);
+  padding: clamp(21px, 4vw, 40px);
+  background: var(--pine);
+  border-radius: 0 26px 0 0;
+}
+.search-heading h2 { font-size: clamp(42px, 5.5vw, 72px); }
+#search-form { margin-top: 22px; }
+#search-form > .primary { background: #b3e1d0; }
+#search-form > .primary:hover { background: #ccf4e6; }
+
+.landscapes {
+  padding-block: clamp(62px, 9vw, 114px) clamp(44px, 6vw, 78px);
+  border-bottom: 1px solid var(--line);
+}
+.landscapes h2 {
+  font-size: clamp(53px, 7vw, 108px);
+  line-height: .87;
+  letter-spacing: -.035em;
+  margin-bottom: clamp(19px, 3vw, 36px);
+}
+.landscape-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(8px, 1.4vw, 20px);
+}
+.landscape {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  isolation: isolate;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  background: var(--pine);
+  color: var(--paper);
+  text-align: left;
+}
+.landscape img, .landscape::after { position: absolute; inset: 0; width: 100%; height: 100%; }
+.landscape img {
+  object-fit: cover;
+  object-position: center var(--landscape-focus, 50%);
+  transition: transform .7s cubic-bezier(.18,.73,.27,1);
+}
+.landscape[data-landscape="coast"] { --landscape-focus: 35%; }
+.landscape[data-landscape="island"] { --landscape-focus: 38%; }
+.landscape[data-landscape="mountains"] { --landscape-focus: 23%; }
+.landscape[data-landscape="dunes"] { --landscape-focus: 29%; }
+.landscape::after { content: ""; background: linear-gradient(0deg, #032525cf, #03252504 67%); }
+.landscape span {
+  position: absolute;
+  z-index: 1;
+  bottom: 9%;
+  left: 8%;
+  font: 400 clamp(27px, 4.15vw, 58px)/.9 var(--serif);
+  letter-spacing: -.025em;
+}
+.landscape:hover img, .landscape:focus-visible img { transform: scale(1.08); }
+.landscape[aria-pressed=true]::before { content: ""; position: absolute; z-index: 2; inset: 5px; border: 2px solid #d4fff1; pointer-events: none; }
+.landscape[aria-pressed=true] span { color: #cbfff0; }
+
+.destinations { padding-top: clamp(58px, 8vw, 105px); }
+.result-meta { display: flex; align-items: center; gap: 14px; }
+.result-meta #clear-landscape { margin-top: 12px; }
+.result-meta #results-status:empty { display: none; }
+.grid[data-landscape-active]:not([data-landscape-active=""]) {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+.grid[data-landscape-active]:not([data-landscape-active=""]) .card-media { max-height: 490px; }
+.grid { gap: clamp(27px, 4vw, 58px) clamp(16px, 2.8vw, 44px); }
+.grid[data-view=destinos][data-landscape-active=""]:has(.card:nth-child(4)) { grid-template-columns: repeat(12,minmax(0,1fr)); }
+.grid[data-view=destinos][data-landscape-active=""]:has(.card:nth-child(4)) .card { grid-column: span 5; }
+.grid[data-view=destinos][data-landscape-active=""]:has(.card:nth-child(4)) .card:nth-child(4n + 2),
+.grid[data-view=destinos][data-landscape-active=""]:has(.card:nth-child(4)) .card:nth-child(4n + 3) { grid-column: span 7; }
+.grid[data-view=destinos][data-landscape-active=""]:has(.card:nth-child(4)) .card-media { aspect-ratio: auto; height: clamp(270px,36vw,475px); }
+.card-media { aspect-ratio: 1.2; }
+.card-open {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: var(--pine);
+  color: var(--paper);
+  text-align: left;
+}
+.card-open::after {
+  content: "";
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(transparent, #012e3280);
+  pointer-events: none;
+  transition: opacity .25s;
+}
+.card-open:focus-visible { outline-offset: -5px; outline-color: #cff7e8; z-index: 1; }
+.card-open-label {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 1;
+  padding: 7px 11px;
+  border-radius: 100px;
+  border: 1px solid #f4f0e780;
+  background: #07302e90;
+  font-size: 13px;
+  line-height: 1.25;
+  font-weight: 700;
+  transition: background .25s;
+}
+.card-open:hover .card-open-label { background: #07302e; }
+.card .badge { z-index: 1; pointer-events: none; }
+.card .favorite { z-index: 2; }
+.card-content h3 { font-size: clamp(37px, 4.6vw, 66px); }
+.card-content .card-note { color: var(--blue); }
+.footer-wordmark em { color: var(--blue); }
+
+@media (max-width: 950px) {
+  .intro-photo { min-height: 270px; }
+}
+@media (max-width: 770px) {
+  .ocean { --surf-crop: 52% center; }
+  .intro { grid-template-columns: 1fr; gap: 29px; padding-block: 55px 40px; }
+  .intro h2 { font-size: clamp(77px, 16vw, 122px); }
+  .intro-photo { aspect-ratio: 1.36; min-height: 230px; }
+  .landscape-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .landscape span { font-size: clamp(26px, 6.2vw, 47px); }
+  .grid[data-view=destinos][data-landscape-active=""]:has(.card:nth-child(4)) .card,
+  .grid[data-view=destinos][data-landscape-active=""]:has(.card:nth-child(4)) .card:nth-child(n) { grid-column: span 6; }
+  .grid[data-view=destinos][data-landscape-active=""]:has(.card:nth-child(4)) .card-media { height: clamp(195px,42vw,275px); }
+}
+@media (max-width: 510px) {
+  .ocean-tagline { font-size: 12px; }
+  .ocean-enter { font-size: 13px; }
+  .result-meta { align-items: start; flex-direction: column; gap: 2px; }
+  .grid[data-view=destinos][data-landscape-active=""]:has(.card:nth-child(4)) .card:nth-child(n) { grid-column: 1/-1; }
+  .grid[data-view=destinos][data-landscape-active=""]:has(.card:nth-child(4)) .card-media { height: clamp(240px,75vw,345px); }
+}
+@media (max-height: 540px) and (orientation: landscape) {
+  .ocean { --scene-height: max(345px, 100svh); }
+  .ocean-title { gap: 12px; }
+  .ocean-title h1 { font-size: clamp(62px, 15vh, 82px); }
+  .ocean-enter, .ocean-toggle { bottom: 14px; }
+}
+
+#flight-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(148px, 1.4fr)) repeat(3, minmax(111px, 1fr)) auto;
+  gap: 8px;
+  margin-top: 22px;
+}
+#flight-form input::placeholder { color: #d3e1dc; opacity: 1; }
+#flight-form > .primary { background: #b3e1d0; }
+#flight-form > .primary:hover { background: #ccf4e6; }
+#flight-info, #flight-feedback {
+  grid-column: 1 / -1;
+  color: #d3e1dc;
+  font-size: 14px;
+  margin: 4px 0 0;
+}
+@media (max-width: 1080px) {
+  #flight-form { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 580px) {
+  #flight-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #flight-form .flight-airport-field { grid-column: 1 / -1; }
+}

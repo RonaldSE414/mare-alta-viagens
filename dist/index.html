@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Maré Alta Viagens. Descubra ilhas, dunas, trilhas e roteiros guiados pela natureza.">
+<meta name="theme-color" content="#083c41">
+<title>Maré Alta — Viagens em outro ritmo</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Crect width='50' height='50' rx='12' fill='%23092d2b'/%3E%3Cpath d='M8 26q8-10 17 0t17 0M8 34q8-10 17 0t17 0' fill='none' stroke='%23f4f0e7' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="journal.css">
+<link rel="stylesheet" href="gallery.css">
+<link rel="stylesheet" href="coast.css">
+<script src="ocean.js" defer></script>
+<script src="ocean-reveal.js" defer></script>
+<script src="app.js" defer></script>
+<script src="airports.js" defer></script>
+<script src="flight-link.js" defer></script>
+<script src="flight-search.js" defer></script>
+<script src="journal.js" defer></script>
+</head>
+<body>
+<svg class="symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="wave" viewBox="0 0 24 24"><path d="M2 10c4-5 7-5 10 0s6 5 10 0M2 16c4-5 7-5 10 0s6 5 10 0"/></symbol>
+<symbol id="plane" viewBox="0 0 24 24"><path d="m17 21-4-8m0 0-7 2-3 3m10-5 6-6c2-2 1-5-2-3l-6 6m0 0-8-4m8 4-2 7-3 3m11 1 2-2-2-9M3 6l2-2 9 2"/></symbol>
+<symbol id="bag" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="14" rx="3"/><path d="M9 7V4h6v3m-6 4v6m6-6v6"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0l-1 1-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+<symbol id="search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+<symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+
+<symbol id="pause" viewBox="0 0 24 24"><path d="M9 5v14m6-14v14"/></symbol>
+<symbol id="play" viewBox="0 0 24 24"><path d="m9 5 10 7-10 7z"/></symbol>
+</defs></svg>
+
+<section class="ocean" id="inicio" aria-labelledby="site-title">
+  <div class="ocean-scene">
+    <div class="ocean-wash" aria-hidden="true"></div>
+    <div class="ocean-visual" aria-hidden="true">
+      <img id="ocean-poster" class="ocean-poster" src="img/surf.webp" alt="" fetchpriority="high" decoding="async">
+      <video id="ocean-video" data-src="img/surf.mp4" muted playsinline loop preload="none" aria-hidden="true"></video>
+      <div class="ocean-shade"></div>
+    </div>
+    <div class="ocean-foreground">
+      <a class="ocean-plan" href="#busca">Planejar viagem</a>
+      <div class="ocean-title">
+        <h1 id="site-title">Maré <em>Alta</em></h1>
+        <p class="ocean-slogan">O azul chama.</p>
+        <p class="ocean-tagline">Viagens em outro ritmo</p>
+      </div>
+      <a class="ocean-enter" href="#explorar">
+        <span class="ocean-enter-icon"><svg aria-hidden="true"><use href="#wave"/></svg></span>
+        <span>Explore com a maré</span>
+      </a>
+      <button class="ocean-toggle" id="ocean-toggle" type="button" aria-pressed="false" hidden>
+        <svg aria-hidden="true"><use href="#pause"/></svg><span class="visually-hidden" data-motion-label>Pausar movimento</span>
+      </button>
+    </div>
+  </div>
+</section>
+<div class="site">
+  <header class="site-header" id="explorar" tabindex="-1">
+    <a class="brand" href="#inicio" aria-label="Maré Alta, início"><svg aria-hidden="true"><use href="#wave"/></svg> maré alta<span>VIAGENS</span></a>
+    <nav aria-label="Navegação principal">
+      <a href="#destinos">Destinos</a><a href="#busca" data-mode="pacotes">Pacotes</a><a href="#busca" data-mode="voos">Voos</a><a href="#journal" class="journal-link">Diário de bordo</a>
+    </nav>
+    <button class="saved" id="saved" type="button"><svg aria-hidden="true"><use href="#heart"/></svg><span>Favoritos</span></button>
+  </header>
+  <main>
+    <section class="intro wrap" aria-labelledby="intro-title">
+      <div class="intro-copy">
+        <p class="eyebrow">Entre o Atlântico e o Mediterrâneo</p>
+        <h2 id="intro-title">Encontre<br>o seu <em>azul.</em></h2>
+        <p class="intro-description">Das enseadas gregas às lagoas dos Lençóis, encontre uma paisagem que combine com a sua próxima viagem.</p>
+        <a class="underlink" href="#paisagens">Explore por paisagem</a>
+      </div>
+      <figure class="intro-photo">
+        <img src="img/hero.webp" alt="Enseada turquesa com falésias e veleiro, inspirada nas Ilhas Jônicas" width="1536" height="1024" loading="lazy">
+        <img class="intro-inset" src="img/journal-grecia.webp" alt="" width="502" height="1024" loading="lazy">
+        <figcaption><svg aria-hidden="true"><use href="#pin"/></svg> Ilhas Jônicas <span>Grécia</span></figcaption>
+      </figure>
+    </section>
+    <section class="wrap search-panel" id="busca" aria-label="Busca de viagens">
+      <div class="search-heading">
+        <h2>Planeje sua viagem</h2>
+        <div class="tabs" role="group" aria-label="Tipo de viagem">
+          <button type="button" data-mode="pacotes" aria-pressed="true" aria-controls="search-form"><svg aria-hidden="true"><use href="#bag"/></svg> Pacotes</button>
+          <button type="button" data-mode="voos" aria-pressed="false" aria-controls="flight-form"><svg aria-hidden="true"><use href="#plane"/></svg> Voos</button>
+        </div>
+      </div>
+      <form id="search-form">
+        <label>Destino<select id="destination"><option value="">Qualquer destino</option></select></label>
+        <label>Ida<input type="date" id="departure"></label>
+        <label>Volta<input type="date" id="return-date"></label>
+        <label>Viajantes<select id="travelers"><option value="1">1 pessoa</option><option value="2" selected>2 pessoas</option><option value="3">3 pessoas</option><option value="4">4 pessoas</option><option value="5">5 pessoas</option><option value="6">6 pessoas</option></select></label>
+        <button class="primary" type="submit"><svg aria-hidden="true"><use href="#search"/></svg><span>Buscar pacotes</span></button>
+      </form>
+      <form id="flight-form" action="https://www.google.com/travel/flights" method="get" target="_blank" rel="noopener noreferrer" hidden>
+        <label class="flight-airport-field">Origem
+          <input id="flight-origin" type="text" list="flight-airports" placeholder="Cidade ou sigla IATA" autocomplete="off" spellcheck="false" required>
+        </label>
+        <label class="flight-airport-field">Destino
+          <input id="flight-destination" type="text" list="flight-airports" placeholder="Cidade ou sigla IATA" autocomplete="off" spellcheck="false" required>
+        </label>
+        <datalist id="flight-airports"></datalist>
+        <label>Ida<input type="date" id="flight-departure" required></label>
+        <label>Volta opcional<input type="date" id="flight-return"></label>
+        <label>Adultos<select id="flight-travelers">
+          <option value="1" selected>1 adulto</option><option value="2">2 adultos</option><option value="3">3 adultos</option>
+          <option value="4">4 adultos</option><option value="5">5 adultos</option><option value="6">6 adultos</option>
+          <option value="7">7 adultos</option><option value="8">8 adultos</option><option value="9">9 adultos</option>
+        </select></label>
+        <input type="hidden" name="tfs">
+        <input type="hidden" name="hl" value="pt-BR">
+        <input type="hidden" name="gl" value="BR">
+        <input type="hidden" name="curr" value="BRL">
+        <button class="primary" type="submit" aria-describedby="flight-info"><svg aria-hidden="true"><use href="#plane"/></svg>Buscar voos</button>
+        <p id="flight-info">As tarifas do Google Flights abrem em outra aba.</p>
+        <p id="flight-feedback" role="status" hidden></p>
+      </form>
+    </section>
+    <section class="landscapes wrap" id="paisagens" aria-labelledby="landscapes-title">
+      <h2 id="landscapes-title">Que paisagem <em>te chama?</em></h2>
+      <div class="landscape-grid">
+        <button class="landscape" type="button" data-landscape="coast" aria-pressed="false" aria-controls="results">
+          <img src="img/grecia.webp" alt="" loading="lazy" width="506" height="506"><span>Costa</span>
+        </button>
+        <button class="landscape" type="button" data-landscape="island" aria-pressed="false" aria-controls="results">
+          <img src="img/maldivas.webp" alt="" loading="lazy" width="506" height="506"><span>Ilhas</span>
+        </button>
+        <button class="landscape" type="button" data-landscape="mountains" aria-pressed="false" aria-controls="results">
+          <img src="img/journal-madeira.webp" alt="" loading="lazy" width="502" height="1024"><span>Montanhas</span>
+        </button>
+        <button class="landscape" type="button" data-landscape="dunes" aria-pressed="false" aria-controls="results">
+          <img src="img/journal-lencois.webp" alt="" loading="lazy" width="502" height="1024"><span>Dunas</span>
+        </button>
+      </div>
+    </section>
+    <section class="wrap destinations" id="destinos" aria-labelledby="results-title">
+      <div class="section-head">
+        <h2 id="results-title" tabindex="-1">Destinos <em>em destaque</em></h2>
+        <div class="filters" id="filters" role="group" aria-label="Filtrar destinos">
+          <button type="button" data-filter="Todos" aria-pressed="true">Todos</button>
+          <button type="button" data-filter="Brasil" aria-pressed="false">Brasil</button>
+          <button type="button" data-filter="Internacional" aria-pressed="false">Internacional</button>
+        </div>
+      </div>
+      <div class="result-meta"><p id="results-status" role="status"></p><button class="text-button" id="clear-landscape" type="button" hidden>Limpar paisagem</button></div>
+      <div class="grid" id="results"></div>
+    </section>
+    <section id="journal"></section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <a class="footer-wordmark" href="#inicio" aria-label="Maré Alta, voltar ao início">maré <em>alta.</em></a>
+      <div>
+        <p>Catálogo demonstrativo · preços ilustrativos</p>
+        <p><a href="https://mixkit.co/free-stock-video/beach-seen-from-the-air-with-waves-reaching-the-shore-51461/">Filmagem da abertura por Mixkit</a></p>
+        <a class="underlink" href="#inicio">Voltar ao mar</a>
+      </div>
+    </div>
+  </footer>
+</div>
+<dialog id="detail" aria-labelledby="detail-title">
+  <button type="button" class="close" aria-label="Fechar"><svg aria-hidden="true"><use href="#close"/></svg></button>
+  <div id="detail-body"></div>
+</dialog>
+</body>
+</html>
